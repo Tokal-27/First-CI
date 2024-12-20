@@ -1,0 +1,68 @@
+---
+- name: Install Docker and run custom container on VMs
+  hosts: all
+  become: yes  # Use sudo to install packages and start services
+  tasks:
+
+    # Step 1: Update apt package list to ensure we have the latest info
+    - name: Update apt package list
+      apt:
+        update_cache: yes
+      tags: update
+
+    # Step 2: Install dependencies required for Docker installation
+    - name: Install dependencies for Docker
+      apt:
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+        state: present
+      tags: dependencies
+
+    # Step 3: Add Docker GPG key for authentication
+    - name: Add Docker GPG key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+      tags: gpg_key
+
+    # Step 4: Add Docker repository to apt sources
+    - name: Add Docker repository
+      apt_repository:
+        repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+        state: present
+      tags: repository
+
+    # Step 5: Install Docker
+    - name: Install Docker
+      apt:
+        name: docker-ce
+        state: latest
+      tags: docker_install
+
+    # Step 6: Ensure Docker service is started and enabled at boot
+    - name: Ensure Docker is started and enabled
+      service:
+        name: docker
+        state: started
+        enabled: yes
+      tags: service
+
+    # Step 7: Pull your custom Docker image from DockerHub (or a private registry)
+    - name: Pull custom Docker image from DockerHub
+      docker_image:
+        name: omartokal/first-ci  
+        source: pull
+      tags: pull_image
+
+    # Step 8: Run Docker container from your custom image
+    - name: Run custom Docker container from image
+      docker_container:
+        name: first-ci   
+        image: omartokal/first-ci 
+        state: started         # Ensure the container is started
+        ports:
+          - "80:80"            # Map port 80 on the host to port 80 in the container
+      tags: run_container
