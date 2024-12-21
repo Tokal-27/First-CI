@@ -31,7 +31,7 @@
     # Step 4: Add Docker repository to apt sources
     - name: Add Docker repository
       apt_repository:
-        repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+        repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"  # Replace focal with your version
         state: present
       tags: repository
 
