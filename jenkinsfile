@@ -1,0 +1,79 @@
+pipeline {
+    agent any
+
+    environment {
+        REPO_URL = 'https://github.com/Tokal-27/First-CI'
+        BRANCH = 'main'
+        DOCKER_IMAGE = 'omartokal/first-ci'
+        DOCKER_TAG = 'latest'
+        DOCKER_USER ='mrrk42541@gmail.com'
+        DOCKER_PASS ='omar#4321'
+        ANSIBLE_PLAYBOOK = 'playbook.yml'
+        INVENTORY_FILE = 'hosts.ini'
+        GITHUB_TOKEN = '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'
+    }
+
+    stages {
+        
+            
+         stage('Pull Code from Git') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Tokal-27/First-CI', credentialsId: 'tokal' 
+            }
+        }
+
+         stage('Pull, Build, and Push Docker Image') {
+             steps {
+               script {
+                  
+                  sh '''
+                  # Login to Docker Hub
+                  #echo ${DOCKER_PASS} | docker login -u ${DOCKER_USER} --password-stdin
+
+                  # Pull the existing image
+                  #docker pull ${DOCKER_IMAGE}:${DOCKER_TAG} || echo "Image not found, building from scratch."
+
+                  # Build the updated image
+                  #docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} .
+
+                  # Push the updated image to Docker Hub
+                  #docker push ${DOCKER_IMAGE}:${DOCKER_TAG}
+                  #docker logout
+                  '''
+            }
+        }
+    }
+
+
+
+        stage('Run Ansible Playbook') {
+            steps {
+                script {
+                    
+                        sh '''
+                        pwd 
+                        ls 
+                        chmod 600 keys/private_key1
+                        chmod 600 keys/private_key2
+ 
+ 
+                        ansible-playbook -i ${INVENTORY_FILE} ${ANSIBLE_PLAYBOOK}
+                        '''
+                    
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Pipeline execution complete.'
+        }
+        success {
+            echo 'Pipeline completed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed. Please check the logs.'
+        }
+    }
+}
