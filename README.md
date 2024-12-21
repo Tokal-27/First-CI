@@ -29,12 +29,15 @@ Build a Docker image:
 Jenkins built a Docker image from the application, encapsulating all dependencies and configurations.
 
 Push the image to Docker Hub:
+![Screenshot from 2024-12-21 18-11-24](https://github.com/user-attachments/assets/3b24eb82-010f-4322-8816-cb9e98e987e6)
+![Screenshot from 2024-12-21 18-10-54](https://github.com/user-attachments/assets/d5d46a88-d619-455b-bbe1-f669ed022a90)
 
 Chapter 5: The Ansible Magic
 
 With the tools prepared, the developer used Ansible to perform the final tasks:
 
 Installing Docker on the two target Vagrant machines:
+
 Ansible ensured that Docker was installed and ready to use on both machines.
 
 Pulling the Docker image from Docker Hub:
