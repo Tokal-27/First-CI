@@ -14,7 +14,9 @@ Chapter 3: The Twin Machines
 
 To test the deployment, the developer conjured two Vagrant machines. These humble machines, with low specifications, became the staging ground for the next steps in the adventure.
 
-![Screenshot from 2024-12-20 14-19-53](https://github.com/user-attachments/assets/cbc78c41-cd6e-48cd-8d70-032f6a4828bf)![Screenshot from 2024-12-20 14-20-13](https://github.com/user-attachments/assets/82fbb9eb-33ac-43f7-85fd-355e496e883e)
+![Screenshot from 2024-12-20 14-19-53](https://github.com/user-attachments/assets/cbc78c41-cd6e-48cd-8d70-032f6a4828bf)
+![Screenshot from 2024-12-20 14-20-13](https://github.com/user-attachments/assets/82fbb9eb-33ac-43f7-85fd-355e496e883e)
+
 
 
 Chapter 4: The Pipeline of Automation
@@ -25,12 +27,16 @@ Pull code from the Git repository (with the help of a credentials token):
 Jenkins fetched the latest code, ensuring the pipeline always worked with the most up-to-date version.
 ![Screenshot from 2024-12-21 16-14-02](https://github.com/user-attachments/assets/70609e18-bd34-458e-9598-e8bfaaee2ca8)
 
+
+
 Build a Docker image:
 Jenkins built a Docker image from the application, encapsulating all dependencies and configurations.
 
 Push the image to Docker Hub:
 ![Screenshot from 2024-12-21 18-11-24](https://github.com/user-attachments/assets/3b24eb82-010f-4322-8816-cb9e98e987e6)
+
 ![Screenshot from 2024-12-21 18-10-54](https://github.com/user-attachments/assets/d5d46a88-d619-455b-bbe1-f669ed022a90)
+
 
 Chapter 5: The Ansible Magic
 
@@ -45,10 +51,15 @@ The image was retrieved from Docker Hub and brought to life on the Vagrant machi
 
 ![Screenshot from 2024-12-21 18-41-36](https://github.com/user-attachments/assets/92595783-3840-4775-a2e7-0e38b9abc021)
 
+
+
 Running a Docker container from the image:
 Finally, the application was launched as a container, completing the journey.
 
 ![Screenshot from 2024-12-20 13-54-17](https://github.com/user-attachments/assets/7e1aa0eb-7282-41f1-9c94-de53955c642e)
+
 ![Screenshot from 2024-12-20 13-54-07](https://github.com/user-attachments/assets/adb984d3-e2be-4c86-8ad4-37a18bf4459b)
+
 And so, the application was successfully deployed, marking the end of this thrilling adventure—for now. Every step taken was a testament to the power of automation, containerization, and collaboration.
+
 
