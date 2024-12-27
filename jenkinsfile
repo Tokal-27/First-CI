@@ -6,8 +6,8 @@ pipeline {
         BRANCH = 'main'
         DOCKER_IMAGE = 'omartokal/first-ci'
         DOCKER_TAG = 'latest'
-        DOCKER_USER ='mrrk42541@gmail.com'
-        DOCKER_PASS ='omar#4321'
+        DOCKER_USER ='Your Email'
+        DOCKER_PASS ='Your Password'
         ANSIBLE_PLAYBOOK = 'playbook.yml'
         INVENTORY_FILE = 'hosts.ini'
         GITHUB_TOKEN = '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'
@@ -18,7 +18,7 @@ pipeline {
             
          stage('Pull Code from Git') {
             steps {
-                git branch: 'main', url: 'https://github.com/Tokal-27/First-CI', credentialsId: 'tokal' 
+                git branch: 'main', url: 'https://github.com/Tokal-27/First-CI', credentialsId: ' Your credentialsId' 
             }
         }
 
@@ -28,17 +28,17 @@ pipeline {
                   
                   sh '''
                   # Login to Docker Hub
-                  #echo ${DOCKER_PASS} | docker login -u ${DOCKER_USER} --password-stdin
+                  echo ${DOCKER_PASS} | docker login -u ${DOCKER_USER} --password-stdin
 
                   # Pull the existing image
-                  #docker pull ${DOCKER_IMAGE}:${DOCKER_TAG} || echo "Image not found, building from scratch."
+                  docker pull ${DOCKER_IMAGE}:${DOCKER_TAG} || echo "Image not found, building from scratch."
 
                   # Build the updated image
-                  #docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} .
+                  docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} .
 
                   # Push the updated image to Docker Hub
-                  #docker push ${DOCKER_IMAGE}:${DOCKER_TAG}
-                  #docker logout
+                  docker push ${DOCKER_IMAGE}:${DOCKER_TAG}
+                  docker logout
                   '''
             }
         }
